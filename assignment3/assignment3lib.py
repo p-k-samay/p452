@@ -3,7 +3,7 @@ def Pow(A,x0,y):
     for i in range(len(x0)):
         for j in range(len(A)):
             Ax[i]+=(A[i][j])*x0[j]
-    #print(Ax)
+
     Axy=0
     for i in range(len(x0)):
         Axy+=(Ax[i])*(y[i])
@@ -95,7 +95,6 @@ def InverseGJ(l):
         p=l[i][i]
         for j in range(2*len(l)):
             l[i][j]=l[i][j]/p
-    #print(l)
 
     l_inv=[[0 for col in range(len(l))] for row in range(len(l))]
     for i in range(len(l)):
@@ -114,7 +113,6 @@ def LeastSquareFit(l):
     x=[[0 for col in range(len(l[0])+2)] for row in range(len(l[0])+2)]
     y=[[0 for col in range(len(l[0])+2)] for row in range(len(l[0])+2)]
     
-    #building matrix for x
     for m in range(len(l[0])+2):
         for j in range(m,len(l[0])+m+2):
             sum=0
@@ -122,8 +120,6 @@ def LeastSquareFit(l):
                 sum=sum+(l[k][0])**j           
             x[m][j-m]=sum
     
-    
-    #building matrix for y
     for i in range(len(l[0])+2):
         sum=0
         for k in range(len(l)):
@@ -181,14 +177,14 @@ def LUForBack(l,U,L):
     x=[0 for i in range(len(L))]
     y[0]=l[0]
 
-    #Solve for y from L.y=b using forward substitution
+
     for i in range(1,len(L)):
         sum=0
         for j in range(i):
             sum=sum+L[i][j]*y[j]
         y[i]=(l[i]-sum)/L[i][i]
     x[len(L)-1]=y[len(L)-1]/U[len(L)-1][len(L)-1]
-    #Solve for x from U.x=y using backward substitution
+    
     for i in range(len(L)-2,-1,-1):
         sum=0
         for j in range(len(L)):
@@ -207,7 +203,6 @@ def chebyshev(x,order):
     elif order==4:
         return (128*(x**4)-256*(x**3)+160*(x**2)-(32*x)+1)
     
-#Defining the function for chebyshev fit
 def fit_chebyshev(l,order):
     x,y=[],[]
     for i in range(len(l)):
